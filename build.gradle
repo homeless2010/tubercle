@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.thinkimi.gradle:mybatis-generator-plugin:2.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.2.0.M4'
     id 'java'
@@ -32,13 +43,26 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
+//    implementation 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         exclude group: 'junit', module: 'junit'
     }
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+apply plugin: "com.thinkimi.gradle.MybatisGenerator"
+
+configurations {
+    mybatisGenerator
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = 'src/main/resources/autogen/generatorConfig.xml'
 }
