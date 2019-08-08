@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Setter
 @Getter
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "sys_user")
-public class User {
+public class User implements Serializable {
     @Id
     private String id;
     @Column(nullable = false)

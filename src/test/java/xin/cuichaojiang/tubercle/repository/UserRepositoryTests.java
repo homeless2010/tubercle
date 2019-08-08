@@ -29,6 +29,12 @@ public class UserRepositoryTests {
 
     }
 
+    @Test
+    public void testQuery() {
+        User user = userRepository.findById("3").orElse(null);
+        System.out.println(user.toString());
+    }
+
 
     @Test
     public void testBaseQuery() {
